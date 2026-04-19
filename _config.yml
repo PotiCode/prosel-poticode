@@ -1,0 +1,30 @@
+title: PotiCode
+description: Processo Trainee PotiCode
+baseurl: "/prosel-poticode"
+url: "https://SEU-USUARIO.github.io"
+lang: pt-BR
+
+theme: minima
+
+minima:
+  skin: dark
+  nav_pages:
+    - capacitacoes.md
+    - sobre.md
+
+sass:
+  style: compressed
+  quiet_deps: true
+  silence_deprecations:
+    - import
+    - color-functions
+    - global-builtin
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - tmp

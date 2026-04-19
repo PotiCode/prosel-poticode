@@ -1,0 +1,27 @@
+# Materiais do Processo Trainee
+#
+# Para adicionar um arquivo:
+#   1. Copie o arquivo (PDF, DOCX, etc.) para a pasta assets/files/
+#   2. Adicione uma entrada na lista "materiais" da categoria correspondente
+#
+# Campos disponíveis:
+#   titulo    — nome exibido na página (obrigatório)
+#   arquivo   — nome do arquivo em assets/files/ (ex: modulo1.pdf) (obrigatório)
+#   descricao — breve descrição do conteúdo (opcional)
+#   tipo      — PDF | DOC | SLIDES (opcional, exibe um badge colorido)
+#
+# Exemplo de entrada:
+#   - titulo: "Apresentação do Processo Trainee"
+#     arquivo: "apresentacao-trainee.pdf"
+#     descricao: "Visão geral do programa e cronograma"
+#     tipo: PDF
+
+categorias:
+  - nome: "Módulo 1 — Introdução"
+    materiais: []
+
+  - nome: "Módulo 2 — Fundamentos Técnicos"
+    materiais: []
+
+  - nome: "Módulo 3 — Projeto Final"
+    materiais: []

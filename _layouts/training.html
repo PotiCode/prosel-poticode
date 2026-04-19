@@ -1,0 +1,96 @@
+---
+layout: base
+---
+
+<script>
+document.documentElement.classList.add('has-sidebar');
+if (localStorage.getItem('sidebar-collapsed') === '1') {
+  document.documentElement.classList.add('sidebar-is-collapsed');
+}
+</script>
+
+<aside class="training-sidebar" id="training-sidebar">
+  <button class="sidebar-toggle-btn" id="sidebar-toggle" aria-label="Recolher sumário">‹</button>
+  <div class="sidebar-body" id="sidebar-body">
+    <p class="sidebar-title">Sumário</p>
+    {% assign toc_items = content | split: "<h" %}
+    <ul class="sidebar-toc">
+      {% for item in toc_items %}
+        {% unless forloop.first %}
+          {% assign lvl = item | slice: 0 %}
+          {% if lvl == "2" or lvl == "3" %}
+            {% assign id_part   = item | split: 'id="' | last | split: '"' | first %}
+            {% assign parts     = item | split: ">" %}
+            {% assign text_part = parts[1] | split: "</h" | first | strip_html | strip %}
+            <li class="stoc-h{{ lvl }}">
+              <a href="#{{ id_part }}" class="stoc-link">{{ text_part }}</a>
+            </li>
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+</aside>
+
+<article class="training-content">
+  <h1 class="training-title">{{ page.title }}</h1>
+  {{ content }}
+</article>
+
+<script>
+(function () {
+  var OPEN_W   = 260;
+  var CLOSED_W = 40;
+
+  var sidebar = document.getElementById('training-sidebar');
+  var sbody   = document.getElementById('sidebar-body');
+  var toggle  = document.getElementById('sidebar-toggle');
+  var wrapper = document.querySelector('.page-content > .wrapper');
+
+  if (!sidebar || !toggle) return;
+
+  function apply(collapsed, animate) {
+    if (!animate) sidebar.classList.add('no-transition');
+    sidebar.classList.toggle('is-collapsed', collapsed);
+    if (!animate) void sidebar.offsetWidth; // force reflow
+    if (!animate) sidebar.classList.remove('no-transition');
+
+    toggle.textContent = collapsed ? '›' : '‹';
+    toggle.setAttribute('aria-label', collapsed ? 'Abrir sumário' : 'Recolher sumário');
+
+    if (collapsed) {
+      document.documentElement.classList.add('sidebar-is-collapsed');
+    } else {
+      document.documentElement.classList.remove('sidebar-is-collapsed');
+    }
+    localStorage.setItem('sidebar-collapsed', collapsed ? '1' : '0');
+  }
+
+  var initCollapsed = localStorage.getItem('sidebar-collapsed') === '1';
+  apply(initCollapsed, false);
+
+  toggle.addEventListener('click', function () {
+    apply(!sidebar.classList.contains('is-collapsed'), true);
+  });
+
+  var links    = document.querySelectorAll('.stoc-link');
+  var headings = document.querySelectorAll('.training-content h2, .training-content h3');
+  if (!links.length || !headings.length) return;
+
+  function setActive(id) {
+    links.forEach(function (l) {
+      l.classList.toggle('stoc-link--active', l.getAttribute('href') === '#' + id);
+    });
+  }
+
+  setActive(headings[0].id);
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '0px 0px -72% 0px', threshold: 0 });
+
+  headings.forEach(function (h) { observer.observe(h); });
+})();
+</script>

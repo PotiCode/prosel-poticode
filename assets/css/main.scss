@@ -1,0 +1,369 @@
+---
+---
+
+// ── PotiCode theme ───────────────────────────────────────────────────────────
+
+$poticode-bg: #1e1e1e;
+$poticode-surface: #252525;
+$poticode-border: #333333;
+$poticode-text: #f0f0f0;
+$poticode-muted: #888899;
+$brand: #1f69ff;
+$font-mono: 'Inter', system-ui, -apple-system, sans-serif;
+
+// Base
+body {
+  background-color: $poticode-bg !important;
+  color: $poticode-text !important;
+  font-family: $font-mono !important;
+  font-size: 16.5px !important;
+  line-height: 1.6 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff !important;
+  font-family: $font-mono !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  color: $brand !important;
+}
+
+h2 {
+  border-bottom: 2px solid $brand;
+  padding-bottom: 0.3rem;
+}
+
+
+::selection {
+  background: rgba(31, 105, 255, 0.28);
+  color: #fff;
+}
+
+a {
+  color: $brand !important;
+}
+
+a:hover {
+  color: #6b9cff !important;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #7ca4ff !important;
+}
+
+// Header / navbar
+.site-header {
+  background-color: $poticode-surface !important;
+  border-top: none !important;
+  border-bottom: 1px solid $poticode-border !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+}
+
+body {
+  padding-top: 56px !important;
+}
+
+.site-title,
+.site-title:visited {
+  color: $poticode-text !important;
+  font-family: $font-mono !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.15s;
+}
+
+.site-title:hover {
+  color: $brand !important;
+  text-decoration: none !important;
+}
+
+.site-logo {
+  height: 28px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.site-nav .nav-item {
+  color: #ffffff !important;
+  font-family: $font-mono !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.site-nav .nav-item:hover {
+  color: $brand !important;
+  text-decoration: none !important;
+  border-bottom-color: $brand;
+}
+
+.site-nav .nav-item.active {
+  color: $brand !important;
+  border-bottom-color: $brand;
+}
+
+@media screen and (max-width: 600px) {
+  .site-nav {
+    background-color: $poticode-surface !important;
+    border: 1px solid $poticode-border !important;
+  }
+}
+
+// Footer
+.site-footer {
+  background-color: $poticode-surface !important;
+  border-top: 1px solid $poticode-border !important;
+  color: $poticode-muted !important;
+}
+
+// Page content
+.page-content {
+  background-color: $poticode-bg !important;
+}
+
+// Blockquotes
+blockquote {
+  border-left-color: $brand !important;
+  color: $poticode-muted !important;
+}
+
+// Code
+pre,
+code {
+  background-color: #252525 !important;
+  border: 1px solid $poticode-border;
+}
+
+// ── Training layout ──────────────────────────────────────────────────────────
+
+html {
+  scroll-behavior: smooth;
+}
+
+h2,
+h3 {
+  scroll-margin-top: 72px;
+}
+
+.training-content {
+  padding: 1rem 0;
+}
+
+.training-title {
+  font-size: 1.8rem !important;
+  margin-bottom: 2rem !important;
+}
+
+// ── Training sidebar TOC ─────────────────────────────────────────────────────
+
+$sidebar-open: 260px;
+$sidebar-closed: 40px;
+
+.training-sidebar {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  width: $sidebar-open;
+  height: calc(100vh - 56px);
+  background: $poticode-bg;
+  border-right: 1px solid $poticode-border;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  overflow: hidden;
+  transition: width 0.25s ease;
+
+  &.is-collapsed {
+    width: $sidebar-closed;
+
+    .sidebar-body {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &.no-transition {
+    transition: none !important;
+  }
+}
+
+.sidebar-toggle-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.5rem;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: $poticode-muted;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  z-index: 1;
+
+  &:hover {
+    color: $poticode-text;
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.sidebar-body {
+  padding: 0.75rem 0.75rem 1rem;
+  overflow-y: auto;
+  flex: 1;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $poticode-muted;
+  margin: 0 0 0.6rem 0.2rem;
+}
+
+.sidebar-toc {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.stoc-h2 {
+  margin-top: 0.25rem;
+}
+
+.stoc-h3 {
+  padding-left: 0.9rem;
+}
+
+.stoc-link {
+  display: block;
+  padding: 0.22rem 0.5rem;
+  font-size: 0.82rem;
+  color: $poticode-muted !important;
+  text-decoration: none !important;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    color: $poticode-text !important;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &--active {
+    color: $brand !important;
+    border-left-color: $brand;
+    background: rgba(31, 105, 255, 0.08);
+  }
+}
+
+// Capacitações listing
+.training-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  li {
+    background: $poticode-surface;
+    border: 1px solid $poticode-border;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-color: $brand;
+    }
+  }
+
+  a {
+    font-weight: 500;
+    color: $poticode-text !important;
+
+    &:hover {
+      color: $brand !important;
+      text-decoration: none !important;
+    }
+  }
+
+  li.locked {
+    opacity: 0.38;
+    cursor: not-allowed;
+
+    a {
+      pointer-events: none;
+      cursor: not-allowed;
+      color: $poticode-muted !important;
+    }
+
+    &:hover {
+      border-color: $poticode-border;
+    }
+  }
+}
+
+.training-week-label {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $poticode-muted !important;
+  border-bottom: none !important;
+  margin: 1.5rem 0 0.4rem !important;
+  padding: 0 !important;
+}
+
+// On screens where the sidebar would overlap the centered wrapper, push the wrapper right
+@media screen and (min-width: 769px) and (max-width: 1260px) {
+  html.has-sidebar .page-content>.wrapper {
+    padding-left: $sidebar-open;
+    transition: padding-left 0.25s ease;
+  }
+
+  html.has-sidebar.sidebar-is-collapsed .page-content>.wrapper {
+    padding-left: $sidebar-closed;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .training-sidebar {
+    display: none;
+  }
+}
