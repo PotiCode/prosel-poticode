@@ -1,10 +1,4 @@
 semanas:
-  - label: "Pré-módulo"
-    sessoes:
-      - titulo: "Introdução — Módulo 1"
-        slug: "introducao"
-        unlock: "2026-01-01"
-
   - label: "Semana 1"
     sessoes:
       - titulo: "Internet"
