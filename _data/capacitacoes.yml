@@ -3,10 +3,10 @@ semanas:
     sessoes:
       - titulo: "Internet"
         slug: "internet"
-        unlock: "2026-06-05"
+        unlock: "2026-04-05"
       - titulo: "HTML"
         slug: "html"
-        unlock: "2026-06-06"
+        unlock: "2026-04-11"
       - titulo: "HTML + Desafio"
         slug: "html-desafio"
         unlock: "2026-06-07"
